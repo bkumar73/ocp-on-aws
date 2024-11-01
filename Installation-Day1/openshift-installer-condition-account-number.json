@@ -18,6 +18,7 @@
                 "ec2:DescribeVolumes",
                 "ec2:GetEbsDefaultKmsKeyId",
                 "s3:PutObjectTagging",
+                "s3:PutBucketPolicy",
                 "s3:DeleteObject",
                 "ec2:DescribeKeyPairs",
                 "iam:ListRolePolicies",
@@ -160,12 +161,16 @@
                 "ec2:AttachNetworkInterface",
                 "iam:ListUsers",
                 "s3:GetBucketLocation",
-                "elasticloadbalancing:ModifyTargetGroup"
+                "elasticloadbalancing:ModifyTargetGroup",
+                "elasticloadbalancing:SetSecurityGroups"
             ],
             "Resource": "*",
             "Condition": {
                 "StringEquals": {
-                    "aws:ResourceAccount": "123456789012"
+                    "aws:ResourceAccount": [
+                        "123456789012",
+                        "531415883065"
+                    ]
                 }
             }
         }
