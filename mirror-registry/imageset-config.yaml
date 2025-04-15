@@ -1,0 +1,33 @@
+kind: ImageSetConfiguration
+apiVersion: mirror.openshift.io/v1alpha2
+archiveSize: 4                                                      
+storageConfig:                                                      
+  registry:
+    imageURL: mirror.hub.mylab.com:8443/mirror/oc-mirror-metadata                 
+    skipTLS: false
+mirror:
+  platform:
+    channels:
+    - name: stable-4.18
+      minVersion: 4.18.5                       
+      maxVersion: 4.18.5                                    
+      type: ocp
+    graph: true                                                     
+  operators:
+  - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.18
+    packages:
+    - name: aws-efs-csi-driver-operator                                     
+      channels:
+      - name: stable                                                
+    - name: sandboxed-containers-operator         
+      channels:
+      - name: stable                                        
+    - name: trustee-operator
+      channels:
+      - name: stable                                                
+    - name: nfd                                
+      channels:
+      - name: stable                                                
+  additionalImages:
+  - name: registry.redhat.io/ubi9/ubi:latest                        
+  helm: {}
