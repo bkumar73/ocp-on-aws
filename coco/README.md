@@ -23,7 +23,7 @@ oc create -f subscription.yaml
 ```
 oc create -f osc-fg-cm.yaml
 ```
-* Create Layered Image FG ConfigMap
+* Create Layered Image FG ConfigMap. Update the Image location to local mirror for disconnected environment.
 
 ```
 oc create -f layeredimage-cm-snp.yaml
