@@ -4,19 +4,11 @@
 Install From OpenShift GUI by following the default steps to install an Operator.
 
 Or Install from CLI.
-* Create a Namespace.
+* Create a Namespace, OperatorGorup and Subscription.
 
 ```
 oc create -f ns.yaml
-```
-* Install OperatorGorup
-
-```
 oc create -f og.yaml
-```
-* Create Subscription
- 
-```
 oc create -f subscription.yaml
 ```
 * Create CoCo feature gate ConfigMap
