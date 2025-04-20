@@ -21,26 +21,22 @@ oc create -f osc-fg-cm.yaml
 oc create -f layeredimage-cm-snp.yaml
 ```
 
+* Create KataConfig
+```
+oc create -f kata-config.yaml
+```
+
 * Install NFD Operator if needed.
 Install From OpenShift GUI by following the default steps to install an Operator.
 
 Or Install from CLI.
-* Create a Namespace.
+* Create a Namespace, OperatorGroup an Subscription.
 
 ```
 oc create -f nfd/ns.yaml
-```
-* Install OperatorGorup
-
-```
 oc create -f nfd/og.yaml
-```
-* Create Subscription 
-
-```
 oc create -f nfd/subscription.yaml
 ```
-
 * Apply NFD CR
 
 ```
