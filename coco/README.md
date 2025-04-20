@@ -60,7 +60,7 @@ export trustee_url="Trustee URL"
 
 * Set Kernel Paratmer variable
 ```
-kernel_params="agent.aa_kbc_params=cc_kbc::$trustee_url"
+export kernel_params="agent.aa_kbc_params=cc_kbc::$trustee_url"
 ```
 * Set the base64 into a variable called source
 ```
