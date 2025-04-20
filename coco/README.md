@@ -47,3 +47,29 @@ oc create -f nfd/nfd-cr.yaml
 ```
 oc create -f nfd/amd-rules.yaml 
 ```
+
+* Create Runtime Class
+```
+oc create -f runtime-class.yaml
+```
+
+* Set Agent Kernel Parameters
+
+** Export Trustee URL variabl
+```
+export trustee_url="Trustee URL"
+```
+
+** Set Kernel Paratmer variable
+```
+kernel_params="agent.aa_kbc_params=cc_kbc::$trustee_url"
+```
+** Set the base64 into a variable called source
+```
+export source=`echo "[hypervisor.qemu]
+kernel_params=\"$kernel_params\"" | base64 -w0`
+```
+** Create MC for Kernel config
+```
+oc create -f set-kernel-parameter-kata-agent.yaml
+```
