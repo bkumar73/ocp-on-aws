@@ -53,7 +53,7 @@ oc create -f layeredimage-cm-snp.yaml
 oc create -f kata-config.yaml
 ```
 
-* Install NFD Operator if needed.
+* Install NFD Operator.
 Install From OpenShift GUI by following the default steps to install an Operator.
 
 Or Install from CLI.
