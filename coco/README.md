@@ -13,7 +13,7 @@ Below Images needs to be mirrored explicitly.
 * Extract openshift-install from release image on mirror registry, eg
 
 ```
-oc adm release extract -a pull-secret.txt --command=openshift-install mirror.hub.mylab.com:8443/openshift/release-images:4.18.5-x86_64
+oc adm release extract -a pull-secret.txt --icsp-file=<icsp-file.yaml> --command=openshift-install mirror.hub.mylab.com:8443/openshift/release-images:4.18.5-x86_64
 ```
 
 * Copy the install-config.yaml and agent-config.yaml to a directory eg "ocp" and create the ISO
