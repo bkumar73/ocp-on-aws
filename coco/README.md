@@ -17,13 +17,61 @@ oc adm release extract -a pull-secret.txt --command=openshift-install mirror.hub
 ```
 ./openshift-install --dir ocp/ agent create image
 ```
-
 * Boot the SNO node using the ISO to install OCP.
+
+* Apply the manifests to support operators from local mirror registry.
 
 # Install and Configure Trustee Operator
 
 * Install OpenShift Trustee.
+
 Install From OpenShift GUI by following the default steps to install an Operator.
+
+Or Install from CLI.
+* Create a Namespace, OperatorGorup and Subscription.
+
+```
+oc create -f trustee/ns.yaml
+oc create -f trustee/og.yaml
+oc create -f trustee/subscription.yaml
+```
+* For disconnected environment, installation of operator may fail which requires editing csv and changing the URL for registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9 to use the @sha256 which can be obtained from mirror registry.
+
+* Create secrets
+
+```
+openssl genpkey -algorithm ed25519 >privateKey
+openssl pkey -in privateKey -pubout -out publicKey
+```
+* Create kbs-auth-public-key secret if it does not exist.
+```
+oc create secret generic kbs-auth-public-key --from-file=publicKey -n trustee-operator-system
+```
+
+* Create KBS configmap
+```
+oc create -f trustee/kbs-cm.yaml
+```
+
+* Create RVPS configmap
+```
+oc create -f trustee/rvps-cm.yaml
+```
+
+* Create resource policy configmap
+```
+oc create -f trustee/resource-policy-cm.yaml
+```
+
+* Create few secrets to serve via Trustee. Create kbsres1 secret only if it doesn't exist. This is just an example. May need to create different secrets for application use cases.
+```
+oc create secret generic kbsres1 --from-literal key1=res1val1 -n trustee-operator-system
+```
+
+* Create KBSConfig
+```
+oc create -f trustee/kbsconfig.yaml
+```
 
 # Install OSC and Configure CoCo
 
