@@ -136,7 +136,7 @@ oc create -f nfd/amd-rules.yaml
 oc create -f runtime-class.yaml
 ```
 
-* Set Agent Kernel Parameters. Export Trustee URL variable
+* Set Agent Kernel Parameters. Export Trustee URL variable. Use the service url if trustee on the same cluster as coco containers. eg http://kbs-service.trustee-operator-system:8080 Use the Route to the svc if trustee is on remote cluster.
 ```
 export trustee_url="Trustee URL"
 ```
