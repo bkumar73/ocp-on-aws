@@ -72,6 +72,7 @@ oc create secret generic kbsres1 --from-literal key1=res1val1 -n trustee-operato
 ```
 oc create -f trustee/kbsconfig.yaml
 ```
+* Create a route to the kbs-service
 
 # Install OSC and Configure CoCo
 

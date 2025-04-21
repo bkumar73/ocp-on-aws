@@ -38,4 +38,5 @@ mirror:
   - name: registry.redhat.io/ubi9/ubi:latest                        
   - name: quay.io/openshift_sandboxed_containers/rhcos-layer/ocp-4.16:snp-0.1.0
   - name: quay.io/coreos/coreos-installer:release
+  - name: registry.redhat.io/confidential-compute-attestation-tech-preview/trustee-rhel9@sha256:71f73e370dbfd3de319975f860247af7a3587ef1d342f8b56592314dfc556902
   helm: {}
