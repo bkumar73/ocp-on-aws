@@ -41,6 +41,11 @@ oc create -f trustee/subscription.yaml
 ```
 * For disconnected environment, installation of operator may fail which requires editing csv and changing the URL for registry.redhat.io/openshift4/ose-kube-rbac-proxy-rhel9 to use the @sha256 which can be obtained from mirror registry.
 
+* Patch the csv to specify image for Trustee.
+```
+export TRUSTEE_IMAGE=<mirror-registtry-url:/openshift_sandboxed_containers/kbs:v0.10.1
+oc patch -n trustee-operator-system clusterserviceversion.operators.coreos.com/trustee-operator.v0.2.0 --type=json -p="[{"op": "replace","path": "/spec/install/spec/deployments/0/spec/template/spec/containers/1/env/1/value","value": "$TRUSTEE_IMAGE"}]"
+```
 * Create secrets
 
 ```
