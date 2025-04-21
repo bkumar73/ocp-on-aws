@@ -109,6 +109,11 @@ oc create -f layeredimage-cm-snp.yaml
 oc create -f kata-config.yaml
 ```
 
+* Wait for the mcp to get fully updated.
+```
+oc get mcp master
+```
+
 * Install NFD Operator.
 Install From OpenShift GUI by following the default steps to install an Operator.
 
