@@ -1,5 +1,3 @@
-# Install and Configure Trustee Operator
-
 # Install Disconnected SNO
 
 * Set up mirror registry for disconnected SNO. An example ImageSetConfiguration can be found at imageset-config.yaml
@@ -19,8 +17,12 @@ oc adm release extract -a pull-secret.txt --command=openshift-install mirror.hub
 ```
 ./openshift-install --dir ocp/ agent create image
 ```
+# Install and Configure Trustee Operator
 
-#Install OSC and Configure CoCo
+* Install OpenShift Trustee.
+Install From OpenShift GUI by following the default steps to install an Operator.
+
+# Install OSC and Configure CoCo
 
 * Install OpenShift SandBox Container Operator.
 Install From OpenShift GUI by following the default steps to install an Operator.
