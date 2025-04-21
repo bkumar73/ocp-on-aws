@@ -1,4 +1,26 @@
-# Steps to install CoCo BareMetal SNO
+# Install and Configure Trustee Operator
+
+# Install Disconnected SNO
+
+* Set up mirror registry for disconnected SNO. An example ImageSetConfiguration can be found at imageset-config.yaml
+
+* Develop install-config.yaml using the example given. Update baseDomain, machineNetwork, installationDisk, pullSecret, imageContentSource, sshKey and additionalTrustBundle as needed.
+
+* Develop agent-config.yaml using the example given. Update rendezvousIP, interface name, macAddress and other details appropriately.
+
+* Extract openshift-install from release image on mirror registry, eg
+
+```
+oc adm release extract -a pull-secret.txt --command=openshift-install mirror.hub.mylab.com:8443/openshift/release-images:4.18.5-x86_64
+```
+
+* Copy the install-config.yaml and agent-config.yaml to a directory eg "ocp"
+
+```
+./openshift-install --dir ocp/ agent create image
+```
+
+#Install OSC and Configure CoCo
 
 * Install OpenShift SandBox Container Operator.
 Install From OpenShift GUI by following the default steps to install an Operator.
