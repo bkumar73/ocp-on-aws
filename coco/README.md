@@ -12,11 +12,14 @@
 oc adm release extract -a pull-secret.txt --command=openshift-install mirror.hub.mylab.com:8443/openshift/release-images:4.18.5-x86_64
 ```
 
-* Copy the install-config.yaml and agent-config.yaml to a directory eg "ocp"
+* Copy the install-config.yaml and agent-config.yaml to a directory eg "ocp" and create the ISO
 
 ```
 ./openshift-install --dir ocp/ agent create image
 ```
+
+* Boot the SNO node using the ISO to install OCP.
+
 # Install and Configure Trustee Operator
 
 * Install OpenShift Trustee.
