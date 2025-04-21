@@ -7,4 +7,4 @@ spec:
   logLevel: info
   kataConfigPoolSelector:
     matchLabels:
-      'node-role.kubernetes.io/master: ""'
+      node-role.kubernetes.io/master: ""
