@@ -90,23 +90,23 @@ Or Install from CLI.
 * Create a Namespace, OperatorGorup and Subscription.
 
 ```
-oc create -f ns.yaml
-oc create -f og.yaml
-oc create -f subscription.yaml
+oc create -f osc/ns.yaml
+oc create -f osc/og.yaml
+oc create -f osc/subscription.yaml
 ```
 * Create CoCo feature gate ConfigMap
 ```
-oc create -f osc-fg-cm.yaml
+oc create -f osc/osc-fg-cm.yaml
 ```
 * Create Layered Image FG ConfigMap. Update the Image location to local mirror for disconnected environment.
 
 ```
-oc create -f layeredimage-cm-snp.yaml
+oc create -f osc/layeredimage-cm-snp.yaml
 ```
 
 * Create KataConfig
 ```
-oc create -f kata-config.yaml
+oc create -f osc/kata-config.yaml
 ```
 
 * Wait for the mcp to get fully updated.
@@ -138,7 +138,7 @@ oc create -f nfd/amd-rules.yaml
 
 * Create Runtime Class
 ```
-oc create -f runtime-class.yaml
+oc create -f osc/runtime-class.yaml
 ```
 
 * Set Agent Kernel Parameters. Export Trustee URL variable. Use the service url if trustee on the same cluster as coco containers. eg http://kbs-service.trustee-operator-system:8080 Use the Route to the svc if trustee is on remote cluster.
@@ -157,5 +157,5 @@ kernel_params=\"$kernel_params\"" | base64 -w0`
 ```
 * Edit the set-kernel-parameter-kata-agent.yaml and replace the $source with the base64 value from above which can be obtained from "echo $source". Then Create MC for Kernel config
 ```
-oc create -f set-kernel-parameter-kata-agent.yaml
+oc create -f osc/set-kernel-parameter-kata-agent.yaml
 ```
