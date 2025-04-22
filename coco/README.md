@@ -155,7 +155,7 @@ export kernel_params="agent.aa_kbc_params=cc_kbc::$trustee_url"
 export source=`echo "[hypervisor.qemu]
 kernel_params=\"$kernel_params\"" | base64 -w0`
 ```
-* Edit the set-kernel-parameter-kata-agent.yaml and replace the $source with the base64 value from about which can be obtained from "echo $source". Then Create MC for Kernel config
+* Edit the set-kernel-parameter-kata-agent.yaml and replace the $source with the base64 value from above which can be obtained from "echo $source". Then Create MC for Kernel config
 ```
 oc create -f set-kernel-parameter-kata-agent.yaml
 ```
