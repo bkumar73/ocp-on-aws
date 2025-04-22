@@ -7,7 +7,7 @@ overhead:
   podFixed:
     memory: "350Mi"
     cpu: "250m"
-    'sev-snp.amd.com/esids: 1'
+    sev-snp.amd.com/esids: 1
 scheduling:
   nodeSelector:
-     'node-role.kubernetes.io/master: ""'
+     node-role.kubernetes.io/master: ""
