@@ -8,17 +8,14 @@ storageConfig:
 mirror:
   platform:
     channels:
-    - name: stable-4.18
-      minVersion: 4.18.5                       
-      maxVersion: 4.18.5                                    
+    - name: stable-4.16
+      minVersion: 4.16.x                       
+      maxVersion: 4.16.x                                    
       type: ocp
     graph: true                                                     
   operators:
-  - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.18
+  - catalog: registry.redhat.io/redhat/redhat-operator-index:v4.16
     packages:
-    - name: aws-efs-csi-driver-operator                                     
-      channels:
-      - name: stable                                                
     - name: sandboxed-containers-operator         
       channels:
       - name: stable                                        
@@ -36,9 +33,10 @@ mirror:
       - name: stable                                                
     - name: lvms-operator                     
       channels:
-      - name: stable-4.18                                                
+      - name: stable-4.16                                              
   additionalImages:
   - name: registry.redhat.io/ubi9/ubi:latest                        
   - name: quay.io/openshift_sandboxed_containers/rhcos-layer/ocp-4.16:snp-0.1.0
   - name: quay.io/coreos/coreos-installer:release
+  - name: quay.io/openshift_sandboxed_containers/kbs:v0.10.1
   helm: {}
