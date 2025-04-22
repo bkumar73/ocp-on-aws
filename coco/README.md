@@ -125,7 +125,7 @@ oc create -f nfd/ns.yaml
 oc create -f nfd/og.yaml
 oc create -f nfd/subscription.yaml
 ```
-* Apply NFD CR
+* Edit nfd/nfd-cr.yaml and point the spec.operand.image to point to the image location in the mirror registry. Then apply NFD CR
 
 ```
 oc create -f nfd/nfd-cr.yaml
