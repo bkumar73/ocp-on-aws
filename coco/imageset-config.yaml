@@ -22,6 +22,8 @@ mirror:
     - name: trustee-operator
       channels:
       - name: stable                                                
+        minVersion: 0.2.0
+        maxVersion: 0.3.0
     - name: nfd                                
       channels:
       - name: stable                                                
