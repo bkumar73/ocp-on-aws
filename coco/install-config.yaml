@@ -19,8 +19,8 @@ networking:
   - 172.30.0.0/16
 platform:
   none: {}
-bootstrapInPlace:
-  installationDisk: '/dev/disk/by-path/pci-0000:04:00.0'
+#bootstrapInPlace:
+#  installationDisk: '/dev/disk/by-path/pci-0000:04:00.0'
 pullSecret: '{"auths":{"mirror.hub.mylab.com:8443": {"auth": "aW5pdDpSZWRIYXQxMjM="} }}'
 imageContentSources:
 - mirrors:
