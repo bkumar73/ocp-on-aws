@@ -25,6 +25,11 @@ oc adm release extract -a pull-secret.txt --icsp-file=<icsp-file.yaml> --command
 
 * Apply the manifests to support operators from local mirror registry.
 
+* Disable all default operator sources.
+```
+oc patch OperatorHub cluster --type json -p '[{"op": "add", "path": "/spec/disableAllDefaultSources", "value": true}]'
+```
+
 # Install and Configure Trustee Operator
 
 * Install OpenShift Trustee.
