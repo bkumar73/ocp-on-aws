@@ -21,7 +21,7 @@ platform:
   none: {}
 #bootstrapInPlace:
 #  installationDisk: '/dev/disk/by-path/pci-0000:04:00.0'
-pullSecret: '{"auths":{"mirror.hub.mylab.com:8443": {"auth": "aW5pdDpSZWRIYXQxMjM="} }}'
+pullSecret: '{"auths":{"mirror.hub.mylab.com:8443": {"auth": "base64 of username:password"} }}'
 imageContentSources:
 - mirrors:
   - mirror.hub.mylab.com:8443/openshift/release-images
