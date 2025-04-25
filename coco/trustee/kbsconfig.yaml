@@ -25,7 +25,7 @@ spec:
 
   # Override attestation policy (optional)
   # kbsAttestationPolicyConfigMapName: attestation-policy
-  KbsEnvVars:
-    HTTPS_PROXY: ""
-    HTTP_PROXY: ""
-    NO_PROXY: ""
+  #KbsEnvVars:
+  #  HTTPS_PROXY: ""
+  #  HTTP_PROXY: ""
+  #  NO_PROXY: ""
