@@ -88,7 +88,7 @@ oc create -f trustee/kbsconfig.yaml
 ```
 # Install OSC and Configure CoCo
 
-* Install OpenShift SandBox Container Operator.
+* Install OpenShift SandBox Container Operator. v1.8.1
 Install From OpenShift GUI by following the default steps to install an Operator.
 
 Or Install from CLI.
