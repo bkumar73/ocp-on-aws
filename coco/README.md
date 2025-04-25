@@ -142,6 +142,11 @@ oc create -f nfd/nfd-cr.yaml
 ```
 oc create -f nfd/amd-rules.yaml 
 ```
+* Verif that the node has below label added by NFD before proceeding to next section
+
+```
+oc get nodes -l "amd.feature.node.kubernetes.io/snp=true"
+```
 
 * Create Runtime Class
 ```
