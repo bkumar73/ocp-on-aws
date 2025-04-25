@@ -1,3 +1,5 @@
+* Source https://www.redhat.com/en/blog/introducing-confidential-containers-bare-metal Refer to the intall-helpers scripts to understand more and have any confusion.
+
 # Install Disconnected SNO
 
 * Set up mirror registry for disconnected SNO. An example ImageSetConfiguration can be found at imageset-config.yaml
