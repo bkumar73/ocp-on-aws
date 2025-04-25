@@ -84,7 +84,7 @@ oc create -f trustee/resource-policy-cm.yaml
 oc create secret generic kbsres1 --from-literal key1=res1val1 -n trustee-operator-system
 ```
 
-* Create KBSConfig
+* Create KBSConfig. Update the HTTP_PROXY, HTTPS_PROXY and NO_PROXY variables if needed and uncomment proxy lines including KbsEnvVars if proxy needs to be configured to reach AMD site.
 ```
 oc create -f trustee/kbsconfig.yaml
 ```
