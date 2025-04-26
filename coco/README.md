@@ -171,3 +171,46 @@ kernel_params=\"$kernel_params\"" | base64 -w0`
 ```
 oc create -f osc/set-kernel-parameter-kata-agent.yaml
 ```
+
+# Basic Testing
+
+* Modify testing/hello-openshift.yaml to update the image location of hello openshif to local mirror
+
+* Create the test pod
+
+```
+oc create -f testing/hello-openshift.yaml
+```
+* Expose the route
+
+```
+oc expose service hello-openshift-service -l app=hello-openshift
+APP_URL=$(oc get routes/hello-openshift-service -o jsonpath='{.spec.host}')
+```
+* Access the App
+
+```
+curl ${APP_URL}
+```
+
+* Verif that the pod is running in Kata VM
+```
+oc debug node/master-0
+ps aux | grep qemu-kv
+```
+
+# Testing Attenstation from Trustee
+
+* Modify testing/ubi-pod.yaml to update the image location to local mirror
+
+*  Create the coco encrypted POD
+
+```
+oc create -f testing/ubi-pod.yaml
+```
+* Fetch the key from trustee. If attestation is successful, you will get the key as output.
+
+```
+oc project default
+oc exec -it ocp-cc-pod -- curl -s http://127.0.0.1:8006/cdh/resource/default/kbsres1/key1 && echo ""
+```
