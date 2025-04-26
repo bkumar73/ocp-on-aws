@@ -199,7 +199,7 @@ oc debug node/master-0
 ps aux | grep qemu-kv
 ```
 
-# Testing Attenstation from Trustee
+# Testing Attestation from Trustee
 
 * Modify testing/ubi-pod.yaml to update the image location to local mirror
 
