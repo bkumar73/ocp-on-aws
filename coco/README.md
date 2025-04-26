@@ -198,6 +198,7 @@ curl ${APP_URL}
 oc debug node/master-0
 ps aux | grep qemu-kv
 ```
+* How to validate the pod is encrypted im memory?
 
 # Testing Attestation from Trustee
 
