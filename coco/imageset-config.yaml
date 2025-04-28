@@ -19,6 +19,8 @@ mirror:
     - name: sandboxed-containers-operator         
       channels:
       - name: stable                                        
+        minVersion: 1.8.1
+        maxVersion: 1.9.0
     - name: trustee-operator
       channels:
       - name: stable                                                
