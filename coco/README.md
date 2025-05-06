@@ -281,7 +281,7 @@ chcon --reference /usr/share/kata-containers/kata-containers-initrd-confidential
 ```
 vi  /etc/kata-containers/snp/configuration.toml
 [hypervisor.qemu]
-#initrd = "/opt/kata/share/kata-containers/rhcos-coco-snp.initrd"
+#initrd = "/usr/share/kata-containers/rhcos-coco-snp.initrd"
 initrd = "/usr/share/kata-containers/rhcos-coco-custom-ca.initrd"
 ```
 * Exit oc debug.
