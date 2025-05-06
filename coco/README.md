@@ -286,6 +286,8 @@ initrd = "/usr/share/kata-containers/rhcos-coco-custom-ca.initrd"
 ```
 * Exit oc debug.
 
+* Create runtime class kata-cc
+
 * Set Agent Kernel Parameters. Export Trustee URL variable. Use the service url if trustee on the same cluster as coco containers. eg http://kbs-service.trustee-operator-system:8080 Use the Route to the svc if trustee is on remote cluster. Extend it to add registry auth.
 
 ```
