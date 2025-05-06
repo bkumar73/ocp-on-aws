@@ -310,3 +310,8 @@ oc apply -f osc/set-kernel-parameter-kata-agent.yaml
 ```
 
 * This will reboot the node and update the MC with the new values.
+
+* Test creation of coco pod. Use annotation io.katacontainers.config.hypervisor.default_memory: "4096" it may be needed.
+```
+io.katacontainers.config.hypervisor.default_memory: "4096"
+```
