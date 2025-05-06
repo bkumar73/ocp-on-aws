@@ -248,7 +248,7 @@ chroot /host
 * Unpack Initrd
 
 ```
-export INITRD="/usr/share/kata-containers/kata-containers-initrd-confidential.img" # From existing setup
+export INITRD="/usr/share/kata-containers/kata-containers-initrd-confidential.img"
 rm -fr /tmp/initrd
 mkdir -p /tmp/initrd && cd /tmp/initrd
 zcat $INITRD |  cpio -idmv
