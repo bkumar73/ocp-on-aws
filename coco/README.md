@@ -215,3 +215,98 @@ oc create -f testing/ubi-pod.yaml
 oc project default
 oc exec -it ocp-cc-pod -- curl -s http://127.0.0.1:8006/cdh/resource/default/kbsres1/key1 && echo ""
 ```
+
+# Support Mirror Registry with CustomCA and Authentication
+
+* Delete all the pods that use runtime class "kata" or "kata-cc"
+
+* Delete runtimeclass kata-cc
+
+* Delete KataConfig
+
+* Wait for the system to reboot and mcp to get updated. Ensure that the rhcos layer for coco is removed before proceeding. "oc get nodes"
+
+* Upgrade or re-install Sandboxed Containers Operator to 1.9.0 version.
+
+* Edit or recreate the layered-image-deploy-cm ConigMap in openshift-sandboxed-containers-operator ns to update the image in osImageURL to the new rhcos layer image.
+
+* Create KataConfig
+
+* Wait for the system to reboot to the new layered image and confirm that the system is rebooted to the new image.
+
+* Extract the pull secret and keep it handy for use in a later step.
+```
+oc get secrets -n openshift-config pull-secret -o jsonpath="{.data.\.dockerconfigjson}" | base64 -d > config.json
+```
+* Customize Initrd after login to the SNO via oc debug node/name.
+
+```
+oc debug node/name
+chroot /host
+```
+
+* Unpack Initrd
+
+```
+export INITRD="/usr/share/kata-containers/kata-containers-initrd-confidential.img" # From existing setup
+rm -fr /tmp/initrd
+mkdir -p /tmp/initrd && cd /tmp/initrd
+zcat $INITRD |  cpio -idmv
+```
+* Add custom CA to initrd. Since dbs used additionalTrustBundle: in install-config.yaml, easiest way it to locat it on the node at /etc/pki/ca-trust/source/anchors/openshift-config-user-ca-bundle.crt
+
+```
+cd /tmp/initrd
+mkdir -p etc/ssl/certs
+cp /etc/pki/ca-trust/source/anchors/openshift-config-user-ca-bundle.crt ./etc/ssl/certs/ca-certificates.crt
+```
+
+* Add registry auth details to initrd. The content of /tmp/config.json is the pull secret extracted in previous step. Can use vi and copy paste the pull secret if the file is not on the node.
+```
+cd /tmp/initrd
+mkdir -p .docker
+cp /tmp/config.json .docker/config.json
+```
+
+* Repack the initrd.
+
+```
+mount -o remount,rw /usr
+find . | cpio -o -c -R root:root | gzip -9 > /usr/share/kata-containers/rhcos-coco-custom-ca.initrd
+
+chcon --reference /usr/share/kata-containers/kata-containers-initrd-confidential.img /usr/share/kata-containers/rhcos-coco-custom-ca.initrd
+```
+* Updat the configuration file on the node to point to the new custom initrd image. Just comment out the existing initrd and create a new line for new initrd. . Do not make any other changes.
+
+```
+vi  /etc/kata-containers/snp/configuration.toml
+[hypervisor.qemu]
+#initrd = "/opt/kata/share/kata-containers/rhcos-coco-snp.initrd"
+initrd = "/usr/share/kata-containers/rhcos-coco-custom-ca.initrd"
+```
+* Exit oc debug.
+
+* Set Agent Kernel Parameters. Export Trustee URL variable. Use the service url if trustee on the same cluster as coco containers. eg http://kbs-service.trustee-operator-system:8080 Use the Route to the svc if trustee is on remote cluster. Extend it to add registry auth.
+
+```
+export trustee_url="http://kbs-service.trustee-operator-system:8080"
+```
+* Set Kernel Paratmer variable
+
+```
+export kernel_params="agent.aa_kbc_params=cc_kbc::$trustee_url agent.image_registry_auth=file:///.docker/config.json"
+```
+
+* Set the base64 into a variable called source
+
+```
+export source=`echo "[hypervisor.qemu]
+kernel_params=\"$kernel_params\"" | base64 -w0`
+```
+* Edit the set-kernel-parameter-kata-agent.yaml and replace the $source with the base64 value from above which can be obtained from "echo $source". Then Create MC for Kernel config
+
+```
+oc apply -f osc/set-kernel-parameter-kata-agent.yaml
+```
+
+* This will reboot the node and update the MC with the new values.
