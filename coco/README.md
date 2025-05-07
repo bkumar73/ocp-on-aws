@@ -253,7 +253,7 @@ rm -fr /tmp/initrd
 mkdir -p /tmp/initrd && cd /tmp/initrd
 zcat $INITRD |  cpio -idmv
 ```
-* Add custom CA to initrd. Since dbs used additionalTrustBundle: in install-config.yaml, easiest way it to locat it on the node at /etc/pki/ca-trust/source/anchors/openshift-config-user-ca-bundle.crt
+* Add custom CA to initrd. If additionalTrustBundle: is used in install-config.yaml, easiest way it to locat it on the node at /etc/pki/ca-trust/source/anchors/openshift-config-user-ca-bundle.crt. If no, create the file manually.
 
 ```
 cd /tmp/initrd
