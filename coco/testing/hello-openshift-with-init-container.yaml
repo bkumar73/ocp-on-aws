@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-openshift
+  namespace: hello-openshift
+  labels:
+    app: hello-openshift
+spec:
+  containers:
+    - name: hello-openshift
+      image: ec2-54-179-36-116.ap-southeast-1.compute.amazonaws.com:8443/hello-openshift/origin-hello-openshift:4.16
+      ports:
+        - containerPort: 8888
+      volumeMounts:
+        - name: luna-secret
+          mountPath: /app/cfg
+          readOnly: true
+  initContainers:
+    - name: ubi-cp
+      image: mirror.hub.mylab.com:8443/ubi9/ubi:latest
+      command: ["sh", "-c"]
+      args:
+        - |
+          cp /mnt/keys/luna-server.pem /app/cfg/
+      volumeMounts:
+        - name: luna-server
+          mountPath: /mnt/keys
+          readOnly: true
+        - name: luna-secret
+          mountPath: /app/cfg
+          readOnly: false
+  volumes:
+    - name: luna-server
+      secret:
+        secretName: luna-server
+    - name: luna-secret
+      emptyDir: {}
