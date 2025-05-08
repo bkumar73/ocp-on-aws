@@ -21,7 +21,8 @@ spec:
       command: ["sh", "-c"]
       args:
         - |
-          cp /mnt/keys/luna-server.pem /app/cfg/
+          #cp /mnt/keys/luna-server.pem /app/cfg/
+          cat /mnt/keys/luna-server.pem > /app/cfg/luna-server.pem
       volumeMounts:
         - name: luna-server
           mountPath: /mnt/keys
