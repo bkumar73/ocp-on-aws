@@ -32,7 +32,6 @@ spec:
       args:
         - |
           cat /mnt/keys/luna-server.pem > /app/cfg/luna-server.pem
-          #cp /mnt/keys/luna-server.pem /app/cfg/
       volumeMounts:
         - name: luna-server
           mountPath: /mnt/keys
