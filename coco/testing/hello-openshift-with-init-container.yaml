@@ -8,21 +8,31 @@ metadata:
 spec:
   containers:
     - name: hello-openshift
-      image: ec2-54-179-36-116.ap-southeast-1.compute.amazonaws.com:8443/hello-openshift/origin-hello-openshift:4.16
+      image: mirror.hub.mylab.com:8443/openshift/origin-hello-openshift:4.16
       ports:
         - containerPort: 8888
       volumeMounts:
         - name: luna-secret
           mountPath: /app/cfg
           readOnly: true
+      securityContext:
+        privileged: false
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+        runAsUser: 1001
+        capabilities:
+          drop:
+            - ALL
+        seccompProfile:
+          type: RuntimeDefault
   initContainers:
     - name: ubi-cp
       image: mirror.hub.mylab.com:8443/ubi9/ubi:latest
       command: ["sh", "-c"]
       args:
         - |
-          #cp /mnt/keys/luna-server.pem /app/cfg/
           cat /mnt/keys/luna-server.pem > /app/cfg/luna-server.pem
+          #cp /mnt/keys/luna-server.pem /app/cfg/
       volumeMounts:
         - name: luna-server
           mountPath: /mnt/keys
@@ -30,6 +40,16 @@ spec:
         - name: luna-secret
           mountPath: /app/cfg
           readOnly: false
+      securityContext:
+        privileged: false
+        allowPrivilegeEscalation: false
+        runAsNonRoot: true
+        runAsUser: 1001
+        capabilities:
+          drop:
+            - ALL
+        seccompProfile:
+          type: RuntimeDefault
   volumes:
     - name: luna-server
       secret:
