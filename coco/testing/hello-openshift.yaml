@@ -5,6 +5,8 @@ metadata:
   namespace: default
   labels:
     app: hello-openshift
+ annotations:
+  io.katacontainers.config.hypervisor.default_memory: "4096"
 spec:
   runtimeClassName: kata-cc
   containers:
