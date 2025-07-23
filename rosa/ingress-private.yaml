@@ -10,6 +10,8 @@ spec:
     clientCA:
       name: ""
     clientCertificatePolicy: ""
+  defaultCertificate:
+    name: sadiqueonline
   domain: "{{external_domain}}"
   endpointPublishingStrategy:
     type: Private
